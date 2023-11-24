@@ -1,36 +1,41 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import SectionTitle from '../../components/SectionTitle/SectionTitle';
 import { useForm } from 'react-hook-form';
 import Swal from 'sweetalert2';
 import useAxiosPublic from '../../hooks/useAxiosPublic';
 import axios from 'axios';
+import useAxiosSecure from '../../hooks/useAxiosSecure';
+import { AuthContext } from '../../providers/AuthProvider';
+
 
 const AddContest = () => {
 
+    const axiosSecure = useAxiosSecure();
     const axiosPublic = useAxiosPublic();
     const { register, handleSubmit, reset } = useForm();
-
-
+    const {user}=useContext(AuthContext)
+    console.log(user)
     const image_hosting_api = `https://api.imgbb.com/1/upload?key=ffb0b38d5ef00b42e67cbd94cc6f2192`;
    
     const onSubmit = async (data) => {
         const imageFile = { image: data.image[0] }
-        const res = await axios.post(image_hosting_api, imageFile, {
+        const res = await axiosPublic.post(image_hosting_api, imageFile, {
             headers: {
                 'content-type': 'multipart/form-data'
             }
         });
-
+        console.log(res.data)
         if (res.data.success) {
             const contest = {
                 contest_name: data.contest_name,
                 contest_description: data.contest_description,
                 contest_prize: data.contest_prize,
                 contest_deadline: data.contest_deadline,
-                contest_image: res.data.data.display_url
+                contest_image: res.data.data.display_url,
+                contest_creator:user.email
             }
 
-            const contest_res = await axiosPublic.post('/contest', contest);
+            const contest_res = await axiosSecure.post('/contest', contest);
             if (contest_res.data.insertedId) {
 
                 reset();
