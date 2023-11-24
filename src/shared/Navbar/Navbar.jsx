@@ -3,12 +3,11 @@ import { useContext } from "react";
 
 import { NavLink } from "react-router-dom";
 
-//  import "./Navbar.css"
 import Switch from "../../theme/Switch";
 import { AuthContext } from "../../providers/AuthProvider";
 const Navbar = () => {
     const { brandName, user, logout } = useContext(AuthContext)
-    // const [, cart] = useCart();
+
 
 
     const handleSignOut = () => {
@@ -45,7 +44,7 @@ const Navbar = () => {
                             {navitem}
                         </ul>
                     </div>
-                    <div className="navbar-end">
+                    <div className="navbar-end flex flex-row gap-2">
                         {user ?
                             <>
                                 <div className="dropdown dropdown-end">
@@ -58,7 +57,7 @@ const Navbar = () => {
                                         <p className="text-center">{user.displayName}</p>
                                         <ul  className=" bg-base-100 rounded-box w-52">
                                            
-                                        <li><NavLink to="/" className="hover:bg-secondary hover:text-neutral-content">Dashboard</NavLink></li>
+                                        <li><NavLink to="/dashboard/home" className="hover:bg-secondary hover:text-neutral-content">Dashboard</NavLink></li>
                                         <li><button onClick={handleSignOut}  className="hover:bg-secondary hover:text-neutral-content">Logout</button></li>
                                         </ul>
                                     </div>
@@ -67,7 +66,7 @@ const Navbar = () => {
                             :
                             <NavLink to="login" className="btn btn-primary text-neutral hover:bg-secondary hover:text-neutral-content">Login</NavLink>
                         }
-                        <Switch />
+                        <Switch/>
 
                     </div>
                 </div>
