@@ -31,6 +31,11 @@ const Dashboard = () => {
                                 <FaBookOpen />
                                 Select Winner</NavLink>
                         </li>
+                        <li>
+                            <NavLink className='hover:bg-secondary text-neutral hover:text-neutral-content' to="/dashboard/managecontest">
+                                <FaBookOpen />
+                                Manage Contest</NavLink>
+                        </li>
                     </ul>
                 </div>
 

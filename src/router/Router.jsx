@@ -10,6 +10,9 @@ import DashboardHome from "../Pages/dashboardHome/DashboardHome";
 import Dr from "../layout/Dr";
 import PrivateRoutes from "./PrivateRoutes";
 import MyContest from "../Pages/myContest/MyContest";
+import ManageContest from "../Pages/ManageContest/ManageContest";
+import ContestSubmitted from "../Pages/ContestSubmitted/ContestSubmitted"
+
 
 
 const Router = createBrowserRouter([
@@ -34,6 +37,11 @@ const Router = createBrowserRouter([
                 element: <Dr />
             },
             {
+                path: "contestsubmitted/:id",
+                element: <PrivateRoutes><ContestSubmitted /></PrivateRoutes>,
+                loader: ({ params }) => fetch(`http://localhost:5000/submisstion/contest/${params.id}`),
+            },
+            {
                 path: "dashboard",
                 element: <Dashboard />,
                 children: [
@@ -48,6 +56,10 @@ const Router = createBrowserRouter([
                     {
                         path: "mycontest",
                         element: <PrivateRoutes><MyContest /></PrivateRoutes>
+                    },
+                    {
+                        path: "managecontest",
+                        element: <PrivateRoutes><ManageContest /></PrivateRoutes>
                     },
                     {
                         path: "winner",

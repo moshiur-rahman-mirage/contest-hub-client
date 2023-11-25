@@ -25,7 +25,7 @@ const AddContest = () => {
                 'content-type': 'multipart/form-data'
             }
         });
-        if (res.data.success) {
+        // if (res.data.success) {
             const contest = {
                 contest_name: data.contest_name,
                 contest_description: data.contest_description,
@@ -42,7 +42,7 @@ const AddContest = () => {
             // console.log(contest_res)
             if (contest_res.data._id) {
 
-                reset();
+              
                 console.log('here swal')
                 Swal.fire({
                     position: "top-end",
@@ -51,8 +51,12 @@ const AddContest = () => {
                     showConfirmButton: false,
                     timer: 1500
                 });
+                reset();
             }
-        }
+            else{
+                console.log('not uploaded')
+            }
+        // }
         // console.log('with image url', res.data);
     };
 

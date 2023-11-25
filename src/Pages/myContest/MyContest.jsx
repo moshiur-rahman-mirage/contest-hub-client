@@ -8,11 +8,18 @@ import Swal from 'sweetalert2';
 import useAuth from '../../hooks/useAuth';
 import useAxiosPublic from '../../hooks/useAxiosPublic';
 import useAxiosSecure from '../../hooks/useAxiosSecure'
+import { useNavigate } from 'react-router-dom';
+import UpdateModal from '../UpdateModal/UpdateModal';
 
 const MyContest = () => {
     const { user } = useAuth();
+    const navigate = useNavigate();
     const axiosSecure = useAxiosSecure();
-    const axiosPublic=useAxiosPublic();
+    const axiosPublic = useAxiosPublic();
+
+    const [selectedData, setSelectedData] = useState(null);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
     // const [pending, setPending] = useState(true);
     console.log(user.email)
     const contestUrl = `/contest?contest_creator=${user.email}`
@@ -21,54 +28,81 @@ const MyContest = () => {
         queryKey: ['mycontest'],
         queryFn: async () => {
             const res = await axiosPublic.get(contestUrl);
-            // console.log(res)
-            // setPending(false);
             return res.data;
         }
     })
-    // console.log(myContest)
-console.log(mySubmittedContest)
-    const [records, setRecords] = useState(mySubmittedContest);
-    // if (records.length < 1) {
-    //     setRecords(books)
-    // }
-// console.log(records)
-    // const handleFilter = (e) => {
-    //     const newData = books.filter(row => {
-    //         return (
-    //             row.title.toLowerCase().includes(e.target.value.toLowerCase()) ||
-    //             row.author.toLowerCase().includes(e.target.value.toLowerCase()) ||
-    //             row.subject.toLowerCase().includes(e.target.value.toLowerCase()))
-    //     })
-    //     setRecords(newData);
-    // }
 
-console.log(records)
-    const handleDeleteBooks = (name, id) => {
-        Swal.fire({
-            title: "Are you sure?",
-            text: "You won't be able to revert this!",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, delete it!"
-        }).then((result) => {
-            if (result.isConfirmed) {
+    console.log(mySubmittedContest)
+    const [isActive, setActive] = useState('');
 
-                axiosSecure.delete(`/books/${id}`)
-                    .then(res => {
-                        if (res.data.deletedCount > 0) {
-                            refetch();
-                            Swal.fire({
-                                title: "Deleted!",
-                                text: `Book has been deleted.`,
-                                icon: "success"
-                            });
-                        }
-                    })
-            }
-        });
+
+
+    // console.log(records)
+    const handleDelete = (contest_status, id) => {
+        if (contest_status === 'Accepted') {
+            Swal.fire({
+                title: "Already Accepted",
+                text: "You won't be able to delete this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                // confirmButtonText: "Yes, delete it!"
+            })
+        } else {
+            Swal.fire({
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, delete it!"
+            }).then((result) => {
+                if (result.isConfirmed) {
+
+                    axiosSecure.delete(`/contest/${id}`)
+                        .then(res => {
+                            if (res.data.deletedCount > 0) {
+                                refetch();
+                                Swal.fire({
+                                    title: "Deleted!",
+                                    text: `Contest has been deleted.`,
+                                    icon: "success"
+                                });
+                                refetch();
+                            }
+                        })
+                }
+            });
+        }
+    }
+
+
+    const navigateSubmission = (id) => {
+        navigate(`/contestsubmitted/${id}`);
+    };
+
+
+    const handleUpdate = (contest_status, id) => {
+        if (contest_status === 'Accepdted') {
+            Swal.fire({
+                title: "Already Accepted",
+                text: "You won't be able to delete this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                // confirmButtonText: "Yes, delete it!"
+            })
+        } else {
+            console.log('hello')
+        }
+    }
+
+    const handleRowClicked = (row) => {
+        setSelectedData(row);
+        setIsModalOpen(true);
     }
 
     const columns = [
@@ -101,27 +135,39 @@ console.log(records)
             selector: row => row.contest_status,
             width: '100px'
         },
-         {
+        {
             name: "Update",
             cell: (row) => (
 
                 <button
-                    className="btn btn-secondary hover:btn-accent btn-xs"
-                    onClick={() => handleUpdate(row.name, row._id)}
+                    className="btn btn-secondary hover:btn-accent btn-xs "
+                    onClick={() => handleUpdate(row.contest_status, row._id)}
                 >
-                    Delete
+                    Update
                 </button>
             ),
         },
-         {
+        {
             name: "Delete",
             cell: (row) => (
 
                 <button
                     className="btn btn-secondary hover:btn-accent btn-xs"
-                    onClick={() => handleDelete(row.name, row._id)}
+                    onClick={() => handleDelete(row.contest_status, row._id)}
                 >
                     Delete
+                </button>
+            ),
+        },
+        {
+            name: "See Submission",
+            cell: (row) => (
+
+                <button
+                    className="btn btn-secondary hover:btn-accent btn-xs"
+                    onClick={() => navigateSubmission(row._id)}
+                >
+                    See Submission
                 </button>
             ),
         }
@@ -145,19 +191,8 @@ console.log(records)
             },
         },
     };
-// onChange={handleFilter}
     return (
         <>
-            <div className="join text-end">
-                <div>
-                    <div>
-                        <input  className="input focus:outline-none input-bordered join-item" placeholder="" />
-                    </div>
-                </div>
-                <div className="indicator">
-                    <p className="btn join-item">Search Contest</p>
-                </div>
-            </div>
             <DataTable
                 title="My Submitted Contests"
                 columns={columns}
@@ -165,12 +200,19 @@ console.log(records)
                 searchable={true}
                 searchPlaceholder="Type to search..."
                 pagination
-                // progressPending={pending}
+                onRowClicked={handleRowClicked}
                 progressComponent={<CustomLoader />}
                 conditionalRowStyles={conditionalRowStyles}
                 customStyles={customStyles}
 
             />
+            {isModalOpen && (
+                <UpdateModal
+                    isOpen={isModalOpen}
+                    closeModal={() => setIsModalOpen(false)}
+                    selectedData={selectedData}
+                />
+            )}
         </>
     );
 };
