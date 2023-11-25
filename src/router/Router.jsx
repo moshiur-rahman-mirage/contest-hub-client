@@ -9,6 +9,7 @@ import SelectWinner from "../Pages/winner/SelectWinner";
 import DashboardHome from "../Pages/dashboardHome/DashboardHome";
 import Dr from "../layout/Dr";
 import PrivateRoutes from "./PrivateRoutes";
+import MyContest from "../Pages/myContest/MyContest";
 
 
 const Router = createBrowserRouter([
@@ -43,6 +44,10 @@ const Router = createBrowserRouter([
                     {
                         path: "addcontest",
                         element: <PrivateRoutes><AddContest /></PrivateRoutes>
+                    },
+                    {
+                        path: "mycontest",
+                        element: <PrivateRoutes><MyContest /></PrivateRoutes>
                     },
                     {
                         path: "winner",

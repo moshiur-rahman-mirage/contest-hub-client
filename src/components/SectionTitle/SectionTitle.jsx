@@ -3,7 +3,7 @@
 const SectionTitle = ({title}) => {
     return (
        <>
-            <h2 className="text-center uppercase font-semibold border-y-slate-500 py-3 md:text-xl  lg:text-4xl">{title}</h2>
+            <h2 className="text-center uppercase font-semibold border-y-slate-500 py-3 md:text-xl  lg:text-3xl">{title}</h2>
        </>
     );
 };

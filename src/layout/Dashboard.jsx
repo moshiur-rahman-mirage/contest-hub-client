@@ -19,6 +19,11 @@ const Dashboard = () => {
                         <li >
                             <NavLink className='hover:bg-secondary text-neutral hover:text-neutral-content' to="/dashboard/addcontest">
                                 <FaUsers />
+                                Submit Contest</NavLink>
+                        </li>
+                        <li>
+                            <NavLink className='hover:bg-secondary text-neutral hover:text-neutral-content' to="/dashboard/mycontest">
+                                <FaBookOpen />
                                 My Contest</NavLink>
                         </li>
                         <li>

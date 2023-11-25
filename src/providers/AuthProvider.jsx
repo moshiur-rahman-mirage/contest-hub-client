@@ -8,7 +8,7 @@ import axios from "axios";
 export const AuthContext = createContext();
 
 const auth = getAuth(app);
-console.log(auth)
+// console.log(auth)
 const AuthProvider = ({ children }) => {
     const brandName = import.meta.env.VITE_brandName
     const [user, setUser] = useState(null);
@@ -17,7 +17,7 @@ const AuthProvider = ({ children }) => {
 
     const createUser = (email, password) => {
         setLoading(true);
-        console.log('here')
+        // console.log('here')
         return createUserWithEmailAndPassword(auth, email, password);
     }
 

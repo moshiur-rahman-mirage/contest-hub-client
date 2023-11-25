@@ -20,6 +20,8 @@ const Navbar = () => {
     const navitem = <>
 
         <li><NavLink to="/" className="hover:bg-secondary hover:text-neutral-content">Home</NavLink></li>
+        <li><NavLink to="/allcontest" className="hover:bg-secondary hover:text-neutral-content">All Contest</NavLink></li>
+        <li><NavLink to="/loeaderboard" className="hover:bg-secondary hover:text-neutral-content">Leader Board</NavLink></li>
 
     </>
 
