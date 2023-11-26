@@ -7,11 +7,13 @@ import Dashboard from "../layout/Dashboard";
 import AddContest from "../Pages/addContest/AddContest";
 import SelectWinner from "../Pages/winner/SelectWinner";
 import DashboardHome from "../Pages/dashboardHome/DashboardHome";
-import Dr from "../layout/Dr";
+import AllContest from "../Pages/allContest/AllContest"
 import PrivateRoutes from "./PrivateRoutes";
 import MyContest from "../Pages/myContest/MyContest";
 import ManageContest from "../Pages/ManageContest/ManageContest";
 import ContestSubmitted from "../Pages/ContestSubmitted/ContestSubmitted"
+import MaterialTabTest from "../Pages/allContest/MaterialTabTest";
+import ShowDetails from "../Pages/ShowDetails/ShowDetails";
 
 
 
@@ -33,8 +35,13 @@ const Router = createBrowserRouter([
                 element: <Signup />
             },
             {
-                path: "dr",
-                element: <Dr />
+                path: "allcontest",
+                element: <AllContest/>
+            },
+            {
+                path: "contest/:id",
+                element: <ShowDetails />,
+                loader : ({ params }) => fetch(`http://localhost:5000/contest/${params.id}`)
             },
             {
                 path: "contestsubmitted/:id",

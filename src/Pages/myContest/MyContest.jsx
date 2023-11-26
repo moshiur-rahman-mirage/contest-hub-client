@@ -141,7 +141,7 @@ const MyContest = () => {
 
                 <button
                     className="btn btn-secondary hover:btn-accent btn-xs "
-                    onClick={() => handleUpdate(row.contest_status, row._id)}
+                    onClick={() => handleRowClicked(row)}
                 >
                     Update
                 </button>

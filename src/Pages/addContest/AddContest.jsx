@@ -25,7 +25,7 @@ const AddContest = () => {
                 'content-type': 'multipart/form-data'
             }
         });
-        // if (res.data.success) {
+        if (res.data.success) {
             const contest = {
                 contest_name: data.contest_name,
                 contest_description: data.contest_description,
@@ -56,7 +56,7 @@ const AddContest = () => {
             else{
                 console.log('not uploaded')
             }
-        // }
+        }
         // console.log('with image url', res.data);
     };
 
