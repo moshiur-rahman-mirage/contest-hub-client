@@ -6,7 +6,7 @@ import { Link, useLoaderData } from 'react-router-dom';
 const ShowDetails = () => {
     const contest = useLoaderData();
 
-    const { _id,contest_name, contest_category, contest_deadline, contest_description, contest_image, contest_instruction, contest_prize, contest_price } = contest[0]
+    const { _id,contest_name, contest_category, contest_deadline, contest_description, contest_image, contest_instruction, contest_prize, contest_price } = contest
     
     const [daysRemaining, setDaysRemaining] = useState(null);
     useEffect(() => {

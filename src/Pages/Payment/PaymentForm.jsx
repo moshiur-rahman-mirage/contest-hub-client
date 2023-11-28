@@ -11,7 +11,7 @@ import { useLoaderData } from 'react-router-dom';
 
 const PaymentForm = () => {
     const contest = useLoaderData();
-    const { _id, contest_price } = contest[0]
+    const { _id, contest_price } = contest
     console.log(contest_price)
     console.log(contest)
     const stripe = useStripe();

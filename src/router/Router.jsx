@@ -15,6 +15,7 @@ import ContestSubmitted from "../Pages/ContestSubmitted/ContestSubmitted"
 import MaterialTabTest from "../Pages/allContest/MaterialTabTest";
 import ShowDetails from "../Pages/ShowDetails/ShowDetails";
 import Pay from "../Pages/Payment/Pay";
+import Users from "../Pages/Users/Users";
 
 
 
@@ -52,7 +53,7 @@ const Router = createBrowserRouter([
             {
                 path: "contestsubmitted/:id",
                 element: <PrivateRoutes><ContestSubmitted /></PrivateRoutes>,
-                loader: ({ params }) => fetch(`http://localhost:5000/submisstion/contest/${params.id}`),
+                loader: ({ params }) => fetch(`http://localhost:5000/submission/contest/${params.id}`),
             },
             {
                 path: "dashboard",
@@ -77,6 +78,10 @@ const Router = createBrowserRouter([
                     {
                         path: "winner",
                         element: <SelectWinner />
+                    },
+                    {
+                        path: "users",
+                        element: <PrivateRoutes><Users/></PrivateRoutes>
                     }
                 ]
             },

@@ -9,7 +9,7 @@ const useContest = () => {
     const {data: contest = [], isPending: loading, refetch} = useQuery({
         queryKey: ['contest'], 
         queryFn: async() =>{
-            const res = await axiosPublic.get('/contest');
+            const res = await axiosPublic.get('/contest?contest_status=Accepted');
             return res.data;
         }
     })

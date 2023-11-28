@@ -200,7 +200,7 @@ const MyContest = () => {
                 searchable={true}
                 searchPlaceholder="Type to search..."
                 pagination
-                onRowClicked={handleRowClicked}
+                // onRowClicked={handleRowClicked}
                 progressComponent={<CustomLoader />}
                 conditionalRowStyles={conditionalRowStyles}
                 customStyles={customStyles}

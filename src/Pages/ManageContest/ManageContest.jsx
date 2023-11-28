@@ -60,7 +60,18 @@ const ManageContest = () => {
         });
     }
 
-    const handleConfirm=(id)=>{
+    const handleConfirm = (id,status) => {
+        if(status==='Accepted'){
+            Swal.fire({
+                title: "Already Accepted!",
+                text: "!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                // confirmButtonText: "Yes, Confirm!"
+            })
+        }else{
         Swal.fire({
             title: "Are you sure you want to confirm?",
             text: "!",
@@ -72,22 +83,23 @@ const ManageContest = () => {
         }).then((result) => {
             if (result.isConfirmed) {
 
-                axiosSecure.put(`/contest/admin/${id}`, {contest_status:'Accepted'})
-                .then(response => {
-                    refetch();
-                    Swal.fire({
-                        title: "Confirmed!",
-                        text: `Contest has been Accepted.`,
-                        icon: "success"
+                axiosSecure.put(`/contest/admin/${id}`, { contest_status: 'Accepted' })
+                    .then(response => {
+                        refetch();
+                        Swal.fire({
+                            title: "Confirmed!",
+                            text: `Contest has been Accepted.`,
+                            icon: "success"
+                        });
+                    })
+                    .catch(error => {
+                        console.error('Update failed:', error.response ? error.response.data : error.message);
                     });
-                })
-                .catch(error => {
-                  console.error('Update failed:', error.response ? error.response.data : error.message);
-                });
-                       
-                    
+
+
             }
         });
+    }
     }
 
 
@@ -145,9 +157,9 @@ const ManageContest = () => {
             name: "Confirm",
             cell: (row) => (
 
-                <button
+                <button 
                     className="btn btn-secondary hover:btn-accent btn-xs"
-                    onClick={() => handleConfirm(row._id)}
+                    onClick={() => handleConfirm(row._id,row.contest_status)}
                 >
                     Confirm
                 </button>
