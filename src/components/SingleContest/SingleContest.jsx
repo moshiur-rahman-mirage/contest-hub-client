@@ -19,7 +19,7 @@ const SingleContest = ({ contest }) => {
             <div>
                 <img
                     alt="Art"
-                    src={contest_image}
+                    src={''}
                     className="h-64   p-2 md:w-full  object-cover sm:h-80 lg:h-96"
                 />
 

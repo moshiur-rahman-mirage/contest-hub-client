@@ -6,12 +6,14 @@ import { Link, useNavigate } from 'react-router-dom';
 
 import { AuthContext } from '../../providers/AuthProvider';
 import { useForm } from 'react-hook-form';
+import useAxiosPublic from '../../hooks/useAxiosPublic';
 
 
 const Signup = () => {
 
     const { user, createUser, brand, logout, updateUserProfile } = useContext(AuthContext)
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
+    const axiosPublic=useAxiosPublic();
     console.log('signup')
     const navigate = useNavigate();
     const onSubmit = (data) => {
@@ -20,6 +22,23 @@ const Signup = () => {
                 updateUserProfile(data.name, data.photoUrl).
                     then(() => {
 
+                    })
+                    .catch((error) => {
+                        const errorCode = error.code;
+                        const errorMessage = error.message;
+                       
+                    })
+                    .then(result => {
+                        const userInfo = {
+                            email: data.email,
+                            name: data.name,
+                            img:data.photoUrl
+                        }
+                        axiosPublic.post('/users', userInfo)
+                            .then(res => {
+        
+                                // navigate('/')
+                            })
                     })
             })
         }

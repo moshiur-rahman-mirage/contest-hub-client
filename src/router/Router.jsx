@@ -14,6 +14,7 @@ import ManageContest from "../Pages/ManageContest/ManageContest";
 import ContestSubmitted from "../Pages/ContestSubmitted/ContestSubmitted"
 import MaterialTabTest from "../Pages/allContest/MaterialTabTest";
 import ShowDetails from "../Pages/ShowDetails/ShowDetails";
+import Pay from "../Pages/Payment/Pay";
 
 
 
@@ -41,6 +42,11 @@ const Router = createBrowserRouter([
             {
                 path: "contest/:id",
                 element: <ShowDetails />,
+                loader : ({ params }) => fetch(`http://localhost:5000/contest/${params.id}`)
+            },
+            {
+                path: "/payment/contest/:id",
+                element: <PrivateRoutes><Pay /></PrivateRoutes>,
                 loader : ({ params }) => fetch(`http://localhost:5000/contest/${params.id}`)
             },
             {
