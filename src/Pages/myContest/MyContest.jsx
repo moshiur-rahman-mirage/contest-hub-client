@@ -80,12 +80,12 @@ const MyContest = () => {
 
 
     const navigateSubmission = (id) => {
-        navigate(`/contestsubmitted/${id}`);
+        navigate(`/dashboard/contestsubmitted/${id}`);
     };
 
 
     const handleUpdate = (contest_status, id) => {
-        if (contest_status === 'Accepdted') {
+        if (contest_status === 'Accepted') {
             Swal.fire({
                 title: "Already Accepted",
                 text: "You won't be able to delete this!",
@@ -100,9 +100,21 @@ const MyContest = () => {
         }
     }
 
-    const handleRowClicked = (row) => {
-        setSelectedData(row);
-        setIsModalOpen(true);
+    const handleRowClicked = (row, status) => {
+        if (status === 'Accepted') {
+            Swal.fire({
+                title: "Already Accepted",
+                text: "You won't be able to delete this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                // confirmButtonText: "Yes, delete it!"
+            })
+        } else {
+            setSelectedData(row);
+            setIsModalOpen(true);
+        }
     }
 
     const columns = [
@@ -141,7 +153,7 @@ const MyContest = () => {
 
                 <button
                     className="btn btn-secondary hover:btn-accent btn-xs "
-                    onClick={() => handleRowClicked(row)}
+                    onClick={() => handleRowClicked(row, row.contest_status)}
                 >
                     Update
                 </button>

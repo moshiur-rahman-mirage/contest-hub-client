@@ -18,6 +18,7 @@ import Pay from "../Pages/Payment/Pay";
 import Users from "../Pages/Users/Users";
 import ParticipatedContest from "../Pages/ParticipatedContest/ParticipatedContest";
 import AxiosInLoader from "../hooks/AxiosInLoader";
+import MaterialTab from "../Pages/MaterialTab/MaterialTab";
 
 
 
@@ -53,11 +54,6 @@ const Router = createBrowserRouter([
                 loader : ({ params }) => fetch(`http://localhost:5000/contest/${params.id}`)
             },
             {
-                path: "contestsubmitted/:id",
-                element: <PrivateRoutes><ContestSubmitted /></PrivateRoutes>,
-                loader: ({ params }) => fetch(`http://localhost:5000/submission/contest/${params.id}`),
-            },
-            {
                 path: "dashboard",
                 element: <Dashboard />,
                 children: [
@@ -89,7 +85,12 @@ const Router = createBrowserRouter([
                         path: "participated/",
                         element: <PrivateRoutes><ParticipatedContest/></PrivateRoutes>,
                       
-                    }
+                    },
+                    {
+                        path: "contestsubmitted/:id",
+                        element: <PrivateRoutes><ContestSubmitted /></PrivateRoutes>,
+                        loader: ({ params }) => fetch(`http://localhost:5000/submission/contest-users-inner-join/${params.id}`),
+                    },
                 ]
             },
         ]

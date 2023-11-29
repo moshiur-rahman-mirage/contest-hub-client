@@ -4,29 +4,23 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import SingleContest from "../../components/SingleContest/SingleContest";
+import SingleTop from "../../components/SingleTop/SingleTop";
 
 const ContestTab = ({ category }) => {
-    // const pagination = {
-    //     clickable: true,
-    //     renderBullet: function (index, className) {
-    //         return '<span class="' + className + '">' + (index + 1) + "</span>";
-    //     },
-    // };
+
     return (
         <div >
 
             <Swiper
-                // pagination={pagination}
-                // modules={[Pagination]}  
                 className="mySwiper"
             >
                 <SwiperSlide>
-                    <div className='grid  gap-5 grid-cols-1 md:grid-cols-4'>
+                    <div className='grid  gap-5 grid-cols-1 md:grid-cols-3'>
                         {
-                            category.map(contest => <SingleContest
+                            category.map(contest => <SingleTop
                                 key={contest._id}
                                 contest={contest}
-                            ></SingleContest>)
+                            ></SingleTop>)
                         }
                     </div>
 

@@ -8,7 +8,7 @@ const Home = () => {
         <div>
             <Banner />
             <Popular />
-            <ContestCategory />
+           
         </div>
     );
 };

@@ -3,8 +3,9 @@ import { useParams } from "react-router-dom";
 import useContest from "../../hooks/useContest";
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 import ContestTab from "./ContestTab";
-import 'react-tabs/style/react-tabs.css';
-import './../allContest/tabstyle.css';
+
+// import './../allContest/tabstyle.css';
+import 'react-tabs/style/react-tabs.css'
 const AllContest = () => {
     const categories = ['Article Writing', 'Business Contest', 'Gaming Contest', 'Medical Contest'];
     const { contest_category } = useParams();
@@ -18,7 +19,8 @@ const AllContest = () => {
     const medical = contest.filter(item => item.contest_category === 'Medical Contest');
 
     return (
-        <div>
+        <div className="max-w-7xl my-10 mx-auto">
+            <div className="grid  w-full place-items-center text-2xl py-5">All Contests By Category</div>
             <Tabs defaultIndex={tabIndex} onSelect={(index) => setTabIndex(index)}>
                 <TabList>
                     <Tab>Article Writing</Tab>

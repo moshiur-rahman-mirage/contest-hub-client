@@ -1,63 +1,43 @@
-import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
-import useContest from '../../hooks/useContest';
 import {
     Tabs,
     TabsHeader,
     TabsBody,
     Tab,
     TabPanel,
-} from "@material-tailwind/react";
-import ContestTab from './ContestTab';
-
-const MaterialTabTest = () => {
-
+  } from "@material-tailwind/react";
+import { useState } from "react";
+import useContest from "../../hooks/useContest";
+   
+  export function MaterialTabTest() {
     const categories = ['Article Writing', 'Business Contest', 'Gaming Contest', 'Medical Contest'];
-    //  const { contest_category } = useParams();
-     const initialIndex = categories.indexOf('Article Writing');
-    const [tabIndex, setTabIndex] = useState(1);
+    const [currentCategory,setCurrentCategory]=useState('');
+    console.log(currentCategory)
     const [contest] = useContest();
+    const contestData = contest.filter(item => item.contest_category === currentCategory);
+   
+    const handleTabChange = (index) => {
+        setCurrentCategory(index);
+      };
 
-    const article = contest.filter(item => item.contest_category === 'Article Writing');
-    const business = contest.filter(item => item.contest_category === 'Business Contest');
-    const gaming = contest.filter(item => item.contest_category === 'Gaming Contest');
-    const medical = contest.filter(item => item.contest_category === 'Medical Contest');
-    // console.log(tabIndex)
     return (
-        <Tabs id="custom-animation" value="html" defaultIndex={tabIndex} onSelect={(index) => setTabIndex(index)}>
-            <TabsHeader
-
-                className="bg-transparent"
-                indicatorProps={{
-                    className: "bg-gray-900/10 shadow-none !text-gray-900",
-                }}>
-                <Tab>Article Writing</Tab>
-                <Tab>Business Contestg</Tab>
-                <Tab>Gaming Contest</Tab>
-                <Tab>Medical Contest</Tab>
-            </TabsHeader>
-            <TabsBody
-                animate={{
-                    initial: { y: 250 },
-                    mount: { y: 0 },
-                    unmount: { y: 250 },
-                }}
-            >
-                <TabPanel>
-                    <ContestTab category={article}></ContestTab>
-                </TabPanel>
-                <TabPanel>
-                    <ContestTab category={business}></ContestTab>
-                </TabPanel>
-                <TabPanel>
-                    <ContestTab category={gaming}></ContestTab>
-                </TabPanel>
-                <TabPanel>
-                    <ContestTab category={medical}></ContestTab>
-                </TabPanel>
-            </TabsBody>
-        </Tabs>
+      <Tabs value="html" className=" max-w-7xl mx-auto"  onChange={handleTabChange}>
+        <TabsHeader className="">
+          {categories.map((category) => (
+            <Tab key={category} value={category} className="h-[50px]" >
+              {category}
+            </Tab>
+          ))}
+        </TabsHeader>
+        {/* <TabsBody>
+          {data.map(({ value, desc }) => (
+            <TabPanel key={value} value={value}>
+              {desc}
+            </TabPanel>
+          ))}
+        </TabsBody> */}
+      </Tabs>
     );
-};
+  }
 
-export default MaterialTabTest;
+
+  export default MaterialTabTest;
