@@ -56,6 +56,27 @@ const Dashboard = () => {
                     </li>
 
 
+                    {(!isCreator && !isAdmin) &&
+                    <>
+                        <li >
+                            <NavLink className='hover:bg-secondary text-neutral hover:text-neutral-content' to="/dashboard/participated">
+                                <FaUsers />
+                               My Participated Contest</NavLink>
+                        </li>
+                        <li>
+                            <NavLink className='hover:bg-secondary text-neutral hover:text-neutral-content' to="/dashboard/winning">
+                                <FaBookOpen />
+                                My Winning Contest</NavLink>
+                        </li>
+                        <li>
+                            <NavLink className='hover:bg-secondary text-neutral hover:text-neutral-content' to="/dashboard/profile">
+                                <FaBookOpen />
+                                My Profile</NavLink>
+                        </li>
+                    </>
+                    }
+
+
 
 
                 </ul>

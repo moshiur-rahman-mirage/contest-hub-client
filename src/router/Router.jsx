@@ -16,6 +16,8 @@ import MaterialTabTest from "../Pages/allContest/MaterialTabTest";
 import ShowDetails from "../Pages/ShowDetails/ShowDetails";
 import Pay from "../Pages/Payment/Pay";
 import Users from "../Pages/Users/Users";
+import ParticipatedContest from "../Pages/ParticipatedContest/ParticipatedContest";
+import AxiosInLoader from "../hooks/AxiosInLoader";
 
 
 
@@ -82,6 +84,11 @@ const Router = createBrowserRouter([
                     {
                         path: "users",
                         element: <PrivateRoutes><Users/></PrivateRoutes>
+                    },
+                    {
+                        path: "participated/",
+                        element: <PrivateRoutes><ParticipatedContest/></PrivateRoutes>,
+                      
                     }
                 ]
             },
