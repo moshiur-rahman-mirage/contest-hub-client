@@ -1,14 +1,33 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 
 
-import { NavLink } from "react-router-dom";
-
+import { Link } from "react-router-dom";
+import {Link as ScrollLink} from "react-scroll"
 import Switch from "../../theme/Switch";
 import { AuthContext } from "../../providers/AuthProvider";
 const Navbar = () => {
     const { brandName, user, logout } = useContext(AuthContext)
+    const [scrolling, setScrolling] = useState(false);
+
+    const handleScroll = () => {
+        if (window.scrollY > 300) {
+          setScrolling(true);
+        } else {
+          setScrolling(false);
+        }
+      };
 
 
+      useEffect(() => {
+        window.addEventListener('scroll', handleScroll);
+    
+        // Clean up the event listener on component unmount
+        return () => {
+          window.removeEventListener('scroll', handleScroll);
+        };
+      }, []);
+
+      const navbarClass = scrolling ? 'bg-gray-800' : 'bg-transparent';
 
     const handleSignOut = () => {
         logout()
@@ -19,57 +38,64 @@ const Navbar = () => {
 
     const navitem = <>
 
-        <li><NavLink to="/" className="hover:bg-secondary hover:text-neutral-content">Home</NavLink></li>
-        <li><NavLink to="/allcontest" className="hover:bg-secondary hover:text-neutral-content">All Contest</NavLink></li>
-        <li><NavLink to="/loeaderboard" className="hover:bg-secondary hover:text-neutral-content">Leader Board</NavLink></li>
+        <li>
+            <Link to="/" className="hover:bg-secondary text-neutral hover:text-neutral-content">Home</Link>
+            
+            
+            </li>
+        <li><Link to="/allcontest" className="hover:bg-secondary text-neutral hover:text-neutral-content">All Contest</Link></li>
+        <li><Link to="/loeaderboard" className="hover:bg-secondary text-neutral hover:text-neutral-content">Leader Board</Link></li>
 
     </>
 
     return (
         <div className="bg-primary">
-            <div className="max-w-7xl mx-auto">
-                <div className="navbar">
+            <div className="max-w-full mx-auto">
+                <div className={`navbar z-50 fixed ${navbarClass}`}>
                     <div className="navbar-start">
                         <div className="dropdown">
-                            <label tabIndex={0} className="btn btn-ghost text-neutral lg:hidden">
+                            <label role="button" tabIndex={0} className="btn btn-ghost text-neutral  lg:hidden">
                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
                             </label>
-                            <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 p-2 shadow  rounded-box w-52">
+                            <ul tabIndex={0} className="border menu menu-sm dropdown-content mt-3 p-2 shadow rounded-box w-52">
                                 {navitem}
                             </ul>
                         </div>
-                        <NavLink to="/" className="btn btn-ghost text-neutral hover:bg-secondary hover:text-neutral-content normal-case text-xl">{brandName}</NavLink>
+                        <Link to="/" className="btn btn-ghost text-neutral hover:bg-secondary hover:text-neutral-content normal-case text-xl">{brandName}</Link>
 
                     </div>
                     <div className="navbar-center text-neutral hidden lg:flex">
-                        <ul className="menu  menu-horizontal px-1">
-                            {navitem}
-                        </ul>
+
                     </div>
                     <div className="navbar-end flex flex-row gap-2">
+                        <div className=" text-neutral hidden lg:flex mr-4">
+                            <ul className="menu  menu-horizontal px-1">
+                                {navitem}
+                            </ul>
+                        </div>
                         {user ?
                             <>
                                 <div className="dropdown dropdown-end">
                                     <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                                         <div className="w-10 rounded-full">
-                                    {console.log(user)}
+                                            {console.log(user)}
                                             <img alt="Tailwind CSS Navbar component" src={user.photoURL} />
                                         </div>
                                     </label>
-                                    <div tabIndex={0} className= " rou bg-base-100 mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content">
-                                        <p className="text-center">{user.displayName}</p>
-                                        <ul  className=" bg-base-100 rounded-box w-52">
-                                           
-                                        <li><NavLink to="/dashboard/home" className="hover:bg-secondary hover:text-neutral-content">Dashboard</NavLink></li>
-                                        <li><button onClick={handleSignOut}  className="hover:bg-secondary hover:text-neutral-content">Logout</button></li>
+                                    <div tabIndex={0} className=" border rounded-lg mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content">
+                                        <p className="text-center text-neutral">{user.displayName}</p>
+                                        <ul className=" rounded-box w-52">
+
+                                            <li><Link to="/dashboard/home" className="hover:bg-secondary text-neutral">Dashboard</Link></li>
+                                            <li><button onClick={handleSignOut} className="hover:bg-secondary text-neutral">Logout</button></li>
                                         </ul>
                                     </div>
                                 </div>
                             </>
                             :
-                            <NavLink to="login" className="btn btn-primary text-neutral hover:bg-secondary hover:text-neutral-content">Login</NavLink>
+                            <Link to="login" className="btn btn-primary text-neutral hover:bg-secondary hover:text-neutral-content">Login</Link>
                         }
-                        <Switch/>
+                        <Switch />
 
                     </div>
                 </div>

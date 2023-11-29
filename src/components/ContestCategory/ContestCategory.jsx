@@ -4,16 +4,26 @@ import React, { useState } from 'react';
 import { useEffect } from 'react';
 import useAxiosPublic from '../../hooks/useAxiosPublic';
 import SingleCategory from '../SingleCategory/SingleCategory';
+import { useQuery } from '@tanstack/react-query';
 
 const ContestCategory = () => {
-    const [xcategory,setxCategory]=useState([]);
+    // const [xcategory,setxCategory]=useState([]);
     const axiosPublic=useAxiosPublic();
     const categoryUrl='contest/contest_category/category'
-    useEffect(()=>{
+    // useEffect(()=>{
 
-        axiosPublic.get(categoryUrl)
-        .then(res=>setxCategory(res.data))
-    },[categoryUrl,axiosPublic])
+    //     axiosPublic.get(categoryUrl)
+    //     .then(res=>setxCategory(res.data))
+    // },[categoryUrl,axiosPublic])
+
+
+    const { data: xcategory = [], refetch } = useQuery({
+        queryKey: ['category'],
+        queryFn: async () => {
+            const res = await axiosPublic.get(categoryUrl);
+            return res.data;
+        }
+    })
 
     return (
         <div>

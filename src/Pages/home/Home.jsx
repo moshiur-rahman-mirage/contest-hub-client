@@ -1,12 +1,14 @@
 import Banner from "../../components/Banner/Banner";
 import ContestCategory from "../../components/ContestCategory/ContestCategory";
+import Popular from "../../components/Popular/Popular";
 
 
 const Home = () => {
     return (
         <div>
-            <Banner/>.
-            <ContestCategory/>
+            <Banner />
+            <Popular />
+            <ContestCategory />
         </div>
     );
 };
