@@ -8,7 +8,7 @@ const Popular = () => {
 
     const axiosPublic = useAxiosPublic();
     const contestUrl = `/contest/top`
-    console.log(contestUrl)
+    // console.log(contestUrl)
 
     const { data: topContest = [], refetch } = useQuery({
         queryKey: ['topContest'],
@@ -19,8 +19,8 @@ const Popular = () => {
     })
     return (
         <div className='max-w-7xl mx-auto -z-20'>
-            <h1 className='uppercase text-center text-3xl font-bold py-5'>
-                Top 5 Contests
+            <h1 className=' my-10 uppercase text-center text-3xl font-bold py-5'>
+                Top Contests
             </h1>
             <div className='grid md:grid-cols-3 grid-cols-1 gap-5'>
 

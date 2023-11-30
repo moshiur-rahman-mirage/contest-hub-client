@@ -46,20 +46,20 @@ const Router = createBrowserRouter([
             {
                 path: "contest/:id",
                 element: <ShowDetails />,
-                loader : ({ params }) => fetch(`http://localhost:5000/contest/${params.id}`)
+                loader : ({ params }) => fetch(`https://b8a12-server-side-moshiur-rahman-mirage.vercel.app/contest/${params.id}`)
             },
             {
                 path: "/payment/contest/:id",
                 element: <PrivateRoutes><Pay /></PrivateRoutes>,
-                loader : ({ params }) => fetch(`http://localhost:5000/contest/${params.id}`)
+                loader : ({ params }) => fetch(`https://b8a12-server-side-moshiur-rahman-mirage.vercel.app/contest/${params.id}`)
             },
             {
                 path: "dashboard",
-                element: <Dashboard />,
+                element: <PrivateRoutes><Dashboard /></PrivateRoutes>,
                 children: [
                     {
                         path: "home",
-                        element: <DashboardHome />
+                        element: <PrivateRoutes><DashboardHome /></PrivateRoutes>
                     },
                     {
                         path: "addcontest",
@@ -84,12 +84,13 @@ const Router = createBrowserRouter([
                     {
                         path: "participated/",
                         element: <PrivateRoutes><ParticipatedContest/></PrivateRoutes>,
+                        loader: ({ params }) => fetch(`https://b8a12-server-side-moshiur-rahman-mirage.vercel.app/submission/participated-contests/${params.userId}`),
                       
                     },
                     {
                         path: "contestsubmitted/:id",
                         element: <PrivateRoutes><ContestSubmitted /></PrivateRoutes>,
-                        loader: ({ params }) => fetch(`http://localhost:5000/submission/contest-users-inner-join/${params.id}`),
+                        loader: ({ params }) => fetch(`https://b8a12-server-side-moshiur-rahman-mirage.vercel.app/submission/contest-users-inner-join/${params.id}`),
                     },
                 ]
             },

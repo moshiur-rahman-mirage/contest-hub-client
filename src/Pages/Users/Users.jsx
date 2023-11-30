@@ -27,37 +27,69 @@ const Users = () => {
 
 
     const handleMakeAdmin = (name, _id) => {
-        axiosSecure.patch(`/users/admin/${_id}`)
-            .then(res => {
-            
-                if (res.data.modifiedCount > 0) {
-                    refetch();
-                    Swal.fire({
-                        position: "top-end",
-                        icon: "success",
-                        title: `${name} is an Admin Now!`,
-                        showConfirmButton: false,
-                        timer: 1500
-                    });
-                }
-            })
+
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, Confirm it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+
+                axiosSecure.patch(`/users/admin/${_id}`)
+                    .then(res => {
+
+                        if (res.status == 200) {
+                            refetch();
+                            Swal.fire({
+                                position: "top-end",
+                                icon: "success",
+                                title: `${name} is an Admin Now!`,
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                        }
+                    })
+            }
+        }
+        )
     }
     const handleMakeCreator = (name, _id) => {
-        axiosSecure.patch(`/users/creator/${_id}`)
-            .then(res => {
-            
-                if (res.data.modifiedCount > 0) {
-                    refetch();
-                    Swal.fire({
-                        position: "top-end",
-                        icon: "success",
-                        title: `${name} is a creator Now!`,
-                        showConfirmButton: false,
-                        timer: 1500
-                    });
-                }
-            })
+
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, Confirm!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+
+                axiosSecure.patch(`/users/creator/${_id}`)
+                    .then(res => {
+console.log(res)
+                        if (res.status == 200) {
+                            refetch();
+                            Swal.fire({
+                                position: "top-end",
+                                icon: "success",
+                                title: `${name} is a creator Now!`,
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                        }
+                    })
+            }
+        }
+        )
     }
+
+
 
 
 
@@ -115,7 +147,7 @@ const Users = () => {
                 row.role === 'admin' ? <h1 className=''>Admin </h1> :
                     <button
                         className="btn btn-secondary hover:btn-accent btn-xs"
-                        onClick={() => handleMakeAdmin(row.name,row._id)}
+                        onClick={() => handleMakeAdmin(row.name, row._id)}
                     >
                         Make Admin
                     </button>
@@ -150,19 +182,19 @@ const Users = () => {
 
     const customStyles = {
         headCells: {
-          style: {
-            backgroundColor: '#4CAF50', // Set the background color of the header
-            color: 'white', // Set the text color of the header
-          },
+            style: {
+                backgroundColor: '#4CAF50', // Set the background color of the header
+                color: 'white', // Set the text color of the header
+            },
         },
-      };
+    };
 
 
     return (
 
         <>
 
-            <div style={{backgroundColor:'#555555'}}>
+            <div style={{ backgroundColor: '#555555' }}>
                 <DataTable
                     title="User List"
                     columns={columns}

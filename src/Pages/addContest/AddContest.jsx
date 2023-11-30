@@ -130,7 +130,7 @@ const AddContest = () => {
                                 <option className='text-neutral-content'>Business Contest</option>
                                 <option className='text-neutral-content'>Medical Contest</option>
                                 <option className='text-neutral-content'>Article Writing</option>
-                                <option className='text-neutral-content'>Gaming</option>
+                                <option className='text-neutral-content'>Gaming Contest</option>
 
                             </select>
                         </div>

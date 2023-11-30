@@ -11,7 +11,7 @@ import useContest from "../../hooks/useContest";
   export function MaterialTabTest() {
     const categories = ['Article Writing', 'Business Contest', 'Gaming Contest', 'Medical Contest'];
     const [currentCategory,setCurrentCategory]=useState('');
-    console.log(currentCategory)
+    // console.log(currentCategory)
     const [contest] = useContest();
     const contestData = contest.filter(item => item.contest_category === currentCategory);
    

@@ -7,7 +7,7 @@ const AxiosInLoader = ({ params }) => {
     const fetchData = async () => {
         try {
             const response = await axiosSecure.get({ params })
-            console.log(response)
+            // console.log(response)
             return response.data;
         }
         catch (error) {

@@ -91,7 +91,7 @@ const Navbar = () => {
                             :
                             <Link to="login" className="btn btn-primary text-neutral hover:bg-secondary hover:text-neutral-content">Login</Link>
                         }
-                        <Switch />
+                        {/* <Switch /> */}
 
                     </div>
                 </div>
