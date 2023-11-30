@@ -20,6 +20,8 @@ import ParticipatedContest from "../Pages/ParticipatedContest/ParticipatedContes
 import AxiosInLoader from "../hooks/AxiosInLoader";
 import MaterialTab from "../Pages/MaterialTab/MaterialTab";
 import Profile from "../Pages/Profile/Profile";
+import ErrorPage from "../ErrorPage";
+import WinningContest from "../Pages/WinningContest/WinningContest";
 
 
 
@@ -27,6 +29,7 @@ const Router = createBrowserRouter([
     {
         path: "/",
         element: <Main />,
+        errorElement:<ErrorPage/>,
         children: [
             {
                 path: "/",
@@ -89,6 +92,12 @@ const Router = createBrowserRouter([
                     {
                         path: "participated/",
                         element: <PrivateRoutes><ParticipatedContest/></PrivateRoutes>,
+                        // loader: ({ params }) => fetch(`https://b8a12-server-side-moshiur-rahman-mirage.vercel.app/submission/participated-contests/${params.userId}`),
+                      
+                    },
+                    {
+                        path: "winning",
+                        element: <PrivateRoutes><WinningContest/></PrivateRoutes>,
                         // loader: ({ params }) => fetch(`https://b8a12-server-side-moshiur-rahman-mirage.vercel.app/submission/participated-contests/${params.userId}`),
                       
                     },

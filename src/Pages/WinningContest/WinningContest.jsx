@@ -6,7 +6,7 @@ import useAxiosPublic from '../../hooks/useAxiosPublic';
 import { AuthContext } from '../../providers/AuthProvider';
 import CustomLoader from '../../components/CustomLoader/CustomLoader';
 
-const ParticipatedContest = () => {
+const WinningContest = () => {
   const [loadingUserData, setLoadingUserData] = useState(true);
   const [loadingParticipated, setLoadingParticipated] = useState(true);
   const axiosPublic = useAxiosPublic();
@@ -116,4 +116,4 @@ const ParticipatedContest = () => {
   );
 };
 
-export default ParticipatedContest;
+export default WinningContest;
