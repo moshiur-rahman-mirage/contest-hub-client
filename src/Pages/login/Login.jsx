@@ -22,7 +22,7 @@ const Login = () => {
         signInUser(email, password)
             .then(result => {
                 // toast.success('Logged In Successfully!');
-                navigate(location?.state ? location.state : '/');
+                navigate(form ? form : '/');
                 
             })
             .catch(error => {

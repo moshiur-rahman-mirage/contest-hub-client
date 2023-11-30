@@ -8,7 +8,7 @@ import { AuthContext } from "../providers/AuthProvider";
 
 
 const PrivateRoutes = ({ children }) => {
-    const { user, loading } = useContext(AuthContext);
+    const { user,usersMongoData, loading } = useContext(AuthContext);
     const location = useLocation();
 
 
@@ -16,7 +16,7 @@ const PrivateRoutes = ({ children }) => {
         return <span className="loading loading-infinity loading-lg"></span>
     }
 
-    if (user) {
+    if (usersMongoData) {
         return children;
     }
 

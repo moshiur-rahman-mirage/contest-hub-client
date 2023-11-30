@@ -13,7 +13,7 @@ const Dashboard = () => {
     const { brandName, user, logout } = useContext(AuthContext)
     const [isAdmin] = useAdmin();
     const [isCreator] = useCreator();
-  console.log(user.email)
+//   console.log(user.email)
 const email=user.email
     const axiosSecure = useAxiosSecure();
     const userUrl=`users/${email}`
@@ -27,7 +27,7 @@ const email=user.email
       }
   })
 
- console.log(userData[0]?._id)
+//  console.log(userData[0]?._id)
 
     return (
 
@@ -81,7 +81,7 @@ const email=user.email
                     {(!isCreator && !isAdmin) &&
                     <>
                         <li >
-                            <NavLink className='hover:bg-secondary text-neutral hover:text-neutral-content' to={`/dashboard/participated/${userData[0]?._id}}`}>
+                            <NavLink className='hover:bg-secondary text-neutral hover:text-neutral-content' to={`/dashboard/participated`}>
                                 <FaUsers />
                                My Participated Contest</NavLink>
                         </li>

@@ -89,7 +89,7 @@ const Router = createBrowserRouter([
                     {
                         path: "participated/",
                         element: <PrivateRoutes><ParticipatedContest/></PrivateRoutes>,
-                        loader: ({ params }) => fetch(`https://b8a12-server-side-moshiur-rahman-mirage.vercel.app/submission/participated-contests/${params.userId}`),
+                        // loader: ({ params }) => fetch(`https://b8a12-server-side-moshiur-rahman-mirage.vercel.app/submission/participated-contests/${params.userId}`),
                       
                     },
                     {

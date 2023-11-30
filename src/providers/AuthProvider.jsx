@@ -13,6 +13,7 @@ const AuthProvider = ({ children }) => {
     const brandName = import.meta.env.VITE_brandName
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true)
+    const [usersMongoData,setUserMongoData]=useState([])
     const axiosPublic = useAxiosPublic();
 
     const createUser = (email, password) => {
@@ -31,6 +32,9 @@ const AuthProvider = ({ children }) => {
         
         return signInWithEmailAndPassword(auth, email, password);
     }
+
+
+    
 
     const signInWithGoogle = async () => {
         console.log('google innser called')
@@ -57,6 +61,13 @@ const AuthProvider = ({ children }) => {
                             localStorage.setItem('access-token', res.data.token);
                         }
                     })
+               
+                    axiosPublic.get(`/users/${currentUser.email}`)
+                    .then(res => {
+                        setUserMongoData(res.data)
+                    })
+
+                    
             }
             else {
                  localStorage.removeItem('access-token')
@@ -75,6 +86,7 @@ const AuthProvider = ({ children }) => {
         createUser,
         signInUser,
         signInWithGoogle,
+        usersMongoData,
         logout,
         loading,
         updateUserProfile
