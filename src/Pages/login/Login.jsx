@@ -8,9 +8,9 @@ import { AiFillGoogleCircle } from "react-icons/ai";
 import { AuthContext } from '../../providers/AuthProvider';
 
 const Login = () => {
-    const location=useLocation();
-    const navigate=useNavigate();
-    const { signInUser, brand,signInWithGoogle } = useContext(AuthContext)
+    const location = useLocation();
+    const navigate = useNavigate();
+    const { signInUser, brand, signInWithGoogle } = useContext(AuthContext)
     const handleLogin = e => {
         e.preventDefault();
 
@@ -23,17 +23,17 @@ const Login = () => {
             .then(result => {
                 // toast.success('Logged In Successfully!');
                 navigate(form ? form : '/');
-                
+
             })
             .catch(error => {
                 console.log(error)
-                if(error.code === 'auth/wrong-password'){
+                if (error.code === 'auth/wrong-password') {
                     // toast.error('Please check the Password');
-                  }
-                  if(error.code === 'auth/invalid-login-credentials'){
+                }
+                if (error.code === 'auth/invalid-login-credentials') {
                     // toast.error('Please check the Email');
-                  }
-                 
+                }
+
             })
 
 
@@ -50,7 +50,7 @@ const Login = () => {
     }
     return (
         <div>
-              {/* <HelmetTitle title="Log In"/> */}
+            {/* <HelmetTitle title="Log In"/> */}
             {/* <ToastContainer/> */}
             <section className="">
                 <div className="flex flex-col  items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
@@ -79,10 +79,10 @@ const Login = () => {
                                         Don’t have an account yet? <Link to="/signup" className="font-medium text-neutral-content  hover:underline ">Sign up</Link>
                                     </p>
                                 </div>
-                                <div className="flex items-center justify-between gap-4">
-                                <p className='text-neutral-content'>Login With Google ?</p>
-                                <button onClick={handleGoogleSignIn} className="btn btn-primary"><AiFillGoogleCircle className="text-3xl bg-primary rounded-lg"></AiFillGoogleCircle></button>
-                               </div>
+                                {/* <div className="flex items-center justify-between gap-4">
+                                    <p className='text-neutral-content'>Login With Google ?</p>
+                                    <button onClick={handleGoogleSignIn} className="btn btn-primary"><AiFillGoogleCircle className="text-3xl bg-primary rounded-lg"></AiFillGoogleCircle></button>
+                                </div> */}
                             </form>
                         </div>
                     </div>

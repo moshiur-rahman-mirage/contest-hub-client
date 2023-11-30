@@ -24,11 +24,11 @@ const PaymentForm = () => {
     const [clientSecret, setClientSecret] = useState('')
     const [paymentMessage, setPaymentMessage] = useState('')
     useEffect(() => {
-        axiosSecure.post('stripe/create-payment-intent', { 
+        axiosSecure.post('stripe/create-payment-intent', {
             price: contest_price,
-            emsil:email 
-           
-        
+            emsil: email
+
+
         })
             .then(res => {
                 setClientSecret(res.data.clientSecret);
@@ -85,7 +85,7 @@ const PaymentForm = () => {
                     transactionId: paymentIntent.id,
                     price: contest_price,
                     date: new Date(),
-                    contest_id:_id
+                    contest_id: _id
 
                 }
 
