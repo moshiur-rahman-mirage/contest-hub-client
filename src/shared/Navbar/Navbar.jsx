@@ -72,8 +72,8 @@ const Navbar = () => {
                         {user ?
                             <>
                                 <div className="dropdown  dropdown-end">
-                                    <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-                                        <div className="w-10 rounded-full">
+                                    <label tabIndex={0} className="btn btn-ghost border-red-500 btn-circle avatar">
+                                        <div className="w-10 border-red-400 rounded-full">
                                             {console.log(user)}
                                             <img alt="Tailwind CSS Navbar component" src={user.photoURL} />
                                         </div>

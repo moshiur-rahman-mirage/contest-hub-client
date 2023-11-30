@@ -28,14 +28,16 @@ const AuthProvider = ({ children }) => {
 
     const signInUser = (email, password) => {
         setLoading(true);
-
+        
         return signInWithEmailAndPassword(auth, email, password);
     }
 
-    const signInWithGoogle = () => {
+    const signInWithGoogle = async () => {
+        console.log('google innser called')
         setLoading(true);
-
-        return signInWithPopup(auth, GoogleAuthProvider);
+        //console.log(GoogleAuthProvider)
+        console.log(auth)
+        return await signInWithPopup(auth, GoogleAuthProvider);
     }
 
     const updateUserProfile = (name, photo) => {

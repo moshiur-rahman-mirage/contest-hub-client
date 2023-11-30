@@ -90,16 +90,14 @@ const email=user.email
                                 <FaBookOpen />
                                 My Winning Contest</NavLink>
                         </li>
-                        <li>
+                       
+                    </>
+                    }
+                     <li>
                             <NavLink className='hover:bg-secondary text-neutral hover:text-neutral-content' to="/dashboard/profile">
                                 <FaBookOpen />
                                 My Profile</NavLink>
                         </li>
-                    </>
-                    }
-
-
-
 
                 </ul>
             </div>

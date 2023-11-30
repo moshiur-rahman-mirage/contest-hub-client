@@ -19,6 +19,7 @@ import Users from "../Pages/Users/Users";
 import ParticipatedContest from "../Pages/ParticipatedContest/ParticipatedContest";
 import AxiosInLoader from "../hooks/AxiosInLoader";
 import MaterialTab from "../Pages/MaterialTab/MaterialTab";
+import Profile from "../Pages/Profile/Profile";
 
 
 
@@ -80,6 +81,10 @@ const Router = createBrowserRouter([
                     {
                         path: "users",
                         element: <PrivateRoutes><Users/></PrivateRoutes>
+                    },
+                    {
+                        path: "profile",
+                        element: <PrivateRoutes><Profile/></PrivateRoutes>
                     },
                     {
                         path: "participated/",
