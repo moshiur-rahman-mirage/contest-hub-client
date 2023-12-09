@@ -4,7 +4,7 @@ import useAuth from "./useAuth";
 
 
 const axiosSecure = axios.create({
-    baseURL: 'https://b8a12-server-side-moshiur-rahman-mirage.vercel.app',
+    baseURL: 'https://contest-hub-server-bice.vercel.app',
     withCredentials: true
 })
 
