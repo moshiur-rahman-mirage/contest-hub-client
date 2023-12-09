@@ -34,7 +34,7 @@ Contest Participation Website
 ## Installation
 #### Download as zip or clone and run bellow command!
 
-#### Replace with your keys
+#### Check example.env file and Replace with your keys
 ```
   VITE_apiKey=
   VITE_authDomain=
